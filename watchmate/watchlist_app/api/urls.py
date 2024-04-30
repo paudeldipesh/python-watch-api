@@ -1,5 +1,5 @@
 from django.urls import path
-from watchlist_app.views import movie_list, movie_detail
+from watchlist_app.api.views import movie_list, movie_detail
 
 app_name = 'watchlist'
 
