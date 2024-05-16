@@ -14,7 +14,7 @@ from watchlist_app.models import Review, StreamPlatform, WatchList
 
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsReviewUserOrReadOnly]
 
     def get_queryset(self):
         return Review.objects.all()
@@ -61,11 +61,10 @@ class StreamPlatformVS(viewsets.ModelViewSet):
     permission_classes = [IsAdminOrReadOnly]
     queryset = StreamPlatform.objects.all()
     serializer_class = StreamPlatformSerializer
-    permission_classes = [IsAdminOrReadOnly]
 
 
 class WatchListAV(APIView):
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         watchlists = WatchList.objects.all()
@@ -82,7 +81,7 @@ class WatchListAV(APIView):
 
 
 class WatchDetailAV(APIView):
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
         try:
