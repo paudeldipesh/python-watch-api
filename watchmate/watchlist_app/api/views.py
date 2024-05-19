@@ -21,8 +21,12 @@ from watchlist_app.models import Review, StreamPlatform, WatchList
 class UserReview(generics.ListAPIView):
     serializer_class = ReviewSerializer
 
+    # def get_queryset(self):
+    #     username = self.kwargs["username"]
+    #     return Review.objects.filter(review_user__username=username)
+
     def get_queryset(self):
-        username = self.kwargs["username"]
+        username = self.request.query_params.get("username", None)
         return Review.objects.filter(review_user__username=username)
 
 
