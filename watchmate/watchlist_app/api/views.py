@@ -91,8 +91,8 @@ class StreamPlatformVS(viewsets.ModelViewSet):
 class WatchListGV(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ["title"]
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ["number_rating"]
 
 
 class WatchListAV(APIView):
