@@ -1,5 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, status, viewsets
+from rest_framework import filters, generics, status, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -91,8 +91,8 @@ class StreamPlatformVS(viewsets.ModelViewSet):
 class WatchListGV(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["title", "platform__name"]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["title"]
 
 
 class WatchListAV(APIView):
