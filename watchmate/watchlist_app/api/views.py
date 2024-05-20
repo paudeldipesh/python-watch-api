@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, status, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
@@ -65,6 +66,9 @@ class ReviewCreate(generics.CreateAPIView):
 class ReviewList(generics.ListAPIView):
     serializer_class = ReviewSerializer
     throttle_classes = [ReviewListThrottle]
+    # Django filters only works on generics views
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["review_user__username", "active"]
 
     def get_queryset(self):
         pk = self.kwargs["pk"]
@@ -82,6 +86,13 @@ class StreamPlatformVS(viewsets.ModelViewSet):
     permission_classes = [IsAdminOrReadOnly]
     queryset = StreamPlatform.objects.all()
     serializer_class = StreamPlatformSerializer
+
+
+class WatchListGV(generics.ListAPIView):
+    queryset = WatchList.objects.all()
+    serializer_class = WatchListSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["title", "platform__name"]
 
 
 class WatchListAV(APIView):
