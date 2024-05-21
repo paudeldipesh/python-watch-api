@@ -9,7 +9,11 @@ from rest_framework.throttling import (
     UserRateThrottle,
 )
 from rest_framework.views import APIView
-from watchlist_app.api.pagination import WatchListLOPagination, WatchListPagination
+from watchlist_app.api.pagination import (
+    WatchListCPagination,
+    WatchListLOPagination,
+    WatchListPagination,
+)
 from watchlist_app.api.permissions import IsAdminOrReadOnly, IsReviewUserOrReadOnly
 from watchlist_app.api.serializers import (
     ReviewSerializer,
@@ -96,7 +100,7 @@ class WatchListGV(generics.ListAPIView):
     # ordering_fields = ["number_rating"]
     filter_backends = [filters.SearchFilter]
     search_fields = ["title"]
-    pagination_class = WatchListLOPagination
+    pagination_class = WatchListCPagination
 
 
 class WatchListAV(APIView):
