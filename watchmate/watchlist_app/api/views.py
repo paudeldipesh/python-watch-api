@@ -9,6 +9,7 @@ from rest_framework.throttling import (
     UserRateThrottle,
 )
 from rest_framework.views import APIView
+from watchlist_app.api.pagination import WatchListPagination
 from watchlist_app.api.permissions import IsAdminOrReadOnly, IsReviewUserOrReadOnly
 from watchlist_app.api.serializers import (
     ReviewSerializer,
@@ -91,8 +92,11 @@ class StreamPlatformVS(viewsets.ModelViewSet):
 class WatchListGV(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
-    filter_backends = [filters.OrderingFilter]
-    ordering_fields = ["number_rating"]
+    # filter_backends = [filters.OrderingFilter]
+    # ordering_fields = ["number_rating"]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["title"]
+    pagination_class = WatchListPagination
 
 
 class WatchListAV(APIView):

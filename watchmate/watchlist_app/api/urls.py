@@ -23,5 +23,5 @@ urlpatterns = [
     path("review/<int:pk>/", ReviewDetail.as_view(), name="review-detail"),
     # path("reviews/<str:username>/", UserReview.as_view(), name="user-review-detail"),
     path("reviews/", UserReview.as_view(), name="user-review-detail"),
-    path("filter/", WatchListGV.as_view(), name="watch-search"),
+    path("get/", WatchListGV.as_view(), name="watch-search"),
 ]
