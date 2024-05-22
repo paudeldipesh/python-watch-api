@@ -104,7 +104,7 @@ class WatchListGV(generics.ListAPIView):
 
 
 class WatchListAV(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = "watch-list"
 
@@ -123,7 +123,7 @@ class WatchListAV(APIView):
 
 
 class WatchDetailAV(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
 
     def get(self, request, pk):
         try:
