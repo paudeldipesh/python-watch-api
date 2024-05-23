@@ -134,23 +134,6 @@ class ReviewTestCase(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
 
-    """
-    def test_review_create_unauthenticated(self):
-        data = {
-            "review_user": self.user,
-            "rating": 5,
-            "description": "Great Movie",
-            "watchlist": self.watchlist,
-            "active": True,
-        }
-
-        self.client.force_authenticate(user=None)
-        response = self.client.post(
-            reverse("review-create", args=(self.watchlist.id,)), data
-        )
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-    """
-
     def test_review_update(self):
         data = {
             "review_user": self.user,

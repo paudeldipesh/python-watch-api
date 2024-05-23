@@ -21,7 +21,6 @@ urlpatterns = [
     path("<int:pk>/create-review/", ReviewCreate.as_view(), name="review-create"),
     path("<int:pk>/reviews/", ReviewList.as_view(), name="review-list"),
     path("review/<int:pk>/", ReviewDetail.as_view(), name="review-detail"),
-    # path("reviews/<str:username>/", UserReview.as_view(), name="user-review-detail"),
     path("reviews/", UserReview.as_view(), name="user-review-detail"),
     path("get/", WatchListGV.as_view(), name="watch-search"),
 ]
